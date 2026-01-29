@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  background: #eef2ff;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+.app.bg {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-layout {
+  width: 360px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.question {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.answer {
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hint {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.word {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 2px solid #6366f1;
+  background: #fff;
+  color: #4338ca;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.word.selected {
+  background: #6366f1;
+  color: #fff;
+}
+
+.result {
+  position: absolute;
+  font-size: 64px;
+  font-weight: 900;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result.ok {
+  color: #22c55e;
+}
+
+.result.ng {
+  color: #ef4444;
+}
