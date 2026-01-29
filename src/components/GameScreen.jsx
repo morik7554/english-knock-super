@@ -110,12 +110,26 @@ export default function GameScreen({ onFinish }) {
 
   return (
     <div className="app bg">
-      <div className="game-layout">
+      <div
+        className="game-layout"
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 16,
+          padding: 24,
+        }}
+      >
         {countdown !== null && <div>{countdown}</div>}
         <div>残り：{timeLeft}秒</div>
-        <div className="card question">{question.ja}</div>
 
-        <div className="card answer">
+        <div className="card question" style={{ width: "100%", maxWidth: 560 }}>
+          {question.jp ?? question.ja}
+        </div>
+
+        <div className="card answer" style={{ width: "100%", maxWidth: 560 }}>
           {userWords.length === 0 && (
             <span className="hint">ここに英文を作ろう</span>
           )}
@@ -135,7 +149,7 @@ export default function GameScreen({ onFinish }) {
           {result === "wrong" && <div className="result ng">×</div>}
         </div>
 
-        <div className="card choices">
+        <div className="card choices" style={{ width: "100%", maxWidth: 560 }}>
           {choices.map((w, i) =>
             w.hidden ? null : (
               <button

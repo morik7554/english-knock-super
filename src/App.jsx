@@ -24,9 +24,55 @@ export default function App() {
 
   if (screen === SCREENS.TITLE) {
     return (
-      <div className="app">
-        <h1>English Knock</h1>
-        <button onClick={startGame}>Start</button>
+      <div
+        className="app"
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 360,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 16,
+            padding: 24,
+          }}
+        >
+          <h1>English Knock</h1>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
+            <button
+              onClick={startGame}
+              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+            >
+              Start
+            </button>
+            <button
+              onClick={() => {}}
+              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+            >
+              Ranking
+            </button>
+            <button
+              onClick={() => {}}
+              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+            >
+              Settings
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
