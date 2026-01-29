@@ -9,6 +9,7 @@ export default function GameScreen({ onFinish }) {
   const [result, setResult] = useState(null);
   const [results, setResults] = useState([]);
   const [timeLeft, setTimeLeft] = useState(45);
+  const [countdown, setCountdown] = useState(3);
   const resultsRef = useRef(results);
 
   useEffect(() => {
@@ -30,6 +31,18 @@ export default function GameScreen({ onFinish }) {
   }, []);
 
   useEffect(() => {
+    if (countdown === null) return;
+    const id = setInterval(() => {
+      setCountdown((c) => {
+        if (c === null) return c;
+        if (c <= 1) return null;
+        return c - 1;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [countdown]);
+
+  useEffect(() => {
     const words = question.en.split(" ").filter(Boolean);
     const shuffled = [...words]
       .map((w, i) => ({ text: w, id: i, hidden: false }))
@@ -40,6 +53,7 @@ export default function GameScreen({ onFinish }) {
   }, [question]);
 
   const onTapChoice = (i) => {
+    if (countdown !== null) return;
     const target = choices[i];
     if (!target || target.hidden) return;
 
@@ -50,6 +64,7 @@ export default function GameScreen({ onFinish }) {
   };
 
   const onTapUserWord = (i) => {
+    if (countdown !== null) return;
     const removed = userWords[i];
     if (!removed) return;
 
@@ -96,6 +111,7 @@ export default function GameScreen({ onFinish }) {
   return (
     <div className="app bg">
       <div className="game-layout">
+        {countdown !== null && <div>{countdown}</div>}
         <div>残り：{timeLeft}秒</div>
         <div className="card question">{question.ja}</div>
 
@@ -109,6 +125,7 @@ export default function GameScreen({ onFinish }) {
               key={i}
               className="word selected"
               onClick={() => onTapUserWord(i)}
+              disabled={countdown !== null}
             >
               {w.text}
             </button>
@@ -121,7 +138,12 @@ export default function GameScreen({ onFinish }) {
         <div className="card choices">
           {choices.map((w, i) =>
             w.hidden ? null : (
-              <button key={i} className="word" onClick={() => onTapChoice(i)}>
+              <button
+                key={i}
+                className="word"
+                onClick={() => onTapChoice(i)}
+                disabled={countdown !== null}
+              >
                 {w.text}
               </button>
             )
