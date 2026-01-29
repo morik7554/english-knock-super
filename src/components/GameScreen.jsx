@@ -109,7 +109,14 @@ export default function GameScreen({ onFinish }) {
   }, [userWords, choices, question, onFinish, results, result]);
 
   return (
-    <div className="app bg">
+    <div
+      className="app bg"
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(180deg, #f6f8ff 0%, #e9eefc 100%)",
+        color: "#1f2a44",
+      }}
+    >
       {countdown !== null && (
         <div
           style={{
@@ -118,7 +125,7 @@ export default function GameScreen({ onFinish }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "rgba(0,0,0,0.45)",
+            background: "rgba(20, 28, 48, 0.55)",
             zIndex: 999,
             fontSize: 120,
             fontWeight: 700,
@@ -140,7 +147,9 @@ export default function GameScreen({ onFinish }) {
           padding: 24,
         }}
       >
-        <div>残り：{timeLeft}秒</div>
+        <div style={{ fontWeight: 600, color: "#2d3a5f" }}>
+          残り：{timeLeft}秒
+        </div>
 
         <div
           className="card question"
@@ -150,6 +159,7 @@ export default function GameScreen({ onFinish }) {
             background: "#f2f4f8",
             borderRadius: 12,
             padding: 16,
+            color: "#2d3a5f",
           }}
         >
           {question.jp ?? question.ja}
@@ -177,6 +187,14 @@ export default function GameScreen({ onFinish }) {
               className="word selected"
               onClick={() => onTapUserWord(i)}
               disabled={countdown !== null}
+              style={{
+                padding: "8px 12px",
+                borderRadius: 10,
+                border: "1px solid #d7defa",
+                background: "#f6f8ff",
+                color: "#1f2a44",
+                cursor: "pointer",
+              }}
             >
               {w.text}
             </button>
@@ -203,7 +221,18 @@ export default function GameScreen({ onFinish }) {
               className="word"
               onClick={() => onTapChoice(i)}
               disabled={countdown !== null || w.hidden}
-              style={w.hidden ? { visibility: "hidden" } : undefined}
+              style={
+                w.hidden
+                  ? { visibility: "hidden" }
+                  : {
+                      padding: "8px 12px",
+                      borderRadius: 10,
+                      border: "1px solid #d7defa",
+                      background: "#ffffff",
+                      color: "#1f2a44",
+                      cursor: "pointer",
+                    }
+              }
             >
               {w.text}
             </button>
