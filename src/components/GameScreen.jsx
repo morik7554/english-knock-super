@@ -110,6 +110,24 @@ export default function GameScreen({ onFinish }) {
 
   return (
     <div className="app bg">
+      {countdown !== null && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(0,0,0,0.45)",
+            zIndex: 999,
+            fontSize: 120,
+            fontWeight: 700,
+            color: "#ffffff",
+          }}
+        >
+          {countdown}
+        </div>
+      )}
       <div
         className="game-layout"
         style={{
@@ -122,14 +140,33 @@ export default function GameScreen({ onFinish }) {
           padding: 24,
         }}
       >
-        {countdown !== null && <div>{countdown}</div>}
         <div>残り：{timeLeft}秒</div>
 
-        <div className="card question" style={{ width: "100%", maxWidth: 560 }}>
+        <div
+          className="card question"
+          style={{
+            width: "100%",
+            maxWidth: 560,
+            background: "#f2f4f8",
+            borderRadius: 12,
+            padding: 16,
+          }}
+        >
           {question.jp ?? question.ja}
         </div>
 
-        <div className="card answer" style={{ width: "100%", maxWidth: 560 }}>
+        <div
+          className="card answer"
+          style={{
+            width: "100%",
+            maxWidth: 560,
+            background: "#ffffff",
+            borderRadius: 14,
+            padding: 20,
+            boxShadow: "0 6px 16px rgba(0,0,0,0.08)",
+            border: "1px solid #e6e9f2",
+          }}
+        >
           {userWords.length === 0 && (
             <span className="hint">ここに英文を作ろう</span>
           )}
@@ -149,19 +186,28 @@ export default function GameScreen({ onFinish }) {
           {result === "wrong" && <div className="result ng">×</div>}
         </div>
 
-        <div className="card choices" style={{ width: "100%", maxWidth: 560 }}>
-          {choices.map((w, i) =>
-            w.hidden ? null : (
-              <button
-                key={i}
-                className="word"
-                onClick={() => onTapChoice(i)}
-                disabled={countdown !== null}
-              >
-                {w.text}
-              </button>
-            )
-          )}
+        <div
+          className="card choices"
+          style={{
+            width: "100%",
+            maxWidth: 560,
+            background: "#f7f8fc",
+            borderRadius: 12,
+            padding: 16,
+            border: "1px dashed #d7defa",
+          }}
+        >
+          {choices.map((w, i) => (
+            <button
+              key={i}
+              className="word"
+              onClick={() => onTapChoice(i)}
+              disabled={countdown !== null || w.hidden}
+              style={w.hidden ? { visibility: "hidden" } : undefined}
+            >
+              {w.text}
+            </button>
+          ))}
         </div>
       </div>
     </div>

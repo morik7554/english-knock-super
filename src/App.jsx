@@ -31,20 +31,25 @@ export default function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          background: "linear-gradient(180deg, #f6f8ff 0%, #e9eefc 100%)",
+          padding: 24,
         }}
       >
         <div
           style={{
             width: "100%",
-            maxWidth: 360,
+            maxWidth: 420,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 16,
-            padding: 24,
+            gap: 18,
+            padding: 28,
+            background: "#ffffff",
+            borderRadius: 16,
+            boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
           }}
         >
-          <h1>English Knock</h1>
+          <h1 style={{ fontSize: 32, margin: 0 }}>English Knock</h1>
           <div
             style={{
               width: "100%",
@@ -55,19 +60,45 @@ export default function App() {
           >
             <button
               onClick={startGame}
-              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+              style={{
+                width: "100%",
+                padding: "16px 18px",
+                fontSize: 18,
+                fontWeight: 600,
+                color: "#ffffff",
+                background: "#4a6cf7",
+                border: "none",
+                borderRadius: 10,
+                cursor: "pointer",
+              }}
             >
               Start
             </button>
             <button
               onClick={() => {}}
-              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                fontSize: 16,
+                borderRadius: 10,
+                border: "1px solid #d7defa",
+                background: "#f6f8ff",
+                cursor: "pointer",
+              }}
             >
               Ranking
             </button>
             <button
               onClick={() => {}}
-              style={{ width: "100%", padding: "14px 16px", fontSize: 18 }}
+              style={{
+                width: "100%",
+                padding: "14px 16px",
+                fontSize: 16,
+                borderRadius: 10,
+                border: "1px solid #d7defa",
+                background: "#f6f8ff",
+                cursor: "pointer",
+              }}
             >
               Settings
             </button>
@@ -78,10 +109,23 @@ export default function App() {
   }
 
   if (screen === SCREENS.RESULT) {
+    const correctCount = results.filter((r) => r.isCorrect).length;
     return (
       <div className="app">
         <h2>Result</h2>
-        <div className="result-list">
+        <div>
+          {correctCount} / {results.length}
+        </div>
+        <div
+          className="result-list"
+          style={{
+            maxHeight: 260,
+            overflowY: "auto",
+            background: "#ffffff",
+            borderRadius: 12,
+            padding: 12,
+          }}
+        >
           {results.map((r, i) => (
             <div key={i} className="result-item">
               {r.isCorrect ? (
